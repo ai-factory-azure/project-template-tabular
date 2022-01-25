@@ -29,7 +29,11 @@ def main():
     # Make sure model output path exists
     if not os.path.exists(args.model_path):
         os.makedirs(args.model_path)
-    
+
+    print(args.data_path)
+    os.listdir(os.getcwd())
+    print(os.getcwd())    
+        
     # Enable auto logging
     mlflow.sklearn.autolog()
     

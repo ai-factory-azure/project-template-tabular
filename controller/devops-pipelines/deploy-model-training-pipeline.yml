@@ -31,9 +31,7 @@ stages:
         parameters:
           environment_name: $(training_environment_name)
           environment_conda_yaml: $(training_environment_conda_yaml)
-      - template: templates/register-dataset.yml@templates-mlops
-        parameters:
-          data_type: training
+      - template: templates/register-dataset-cli.yml@templates-mlops
       - template: templates/get-compute.yml@templates-mlops
         parameters:
           compute_type: training

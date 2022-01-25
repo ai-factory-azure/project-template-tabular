@@ -13,10 +13,6 @@ resources:
       name: ai-factory-azure/templates-mlops
       endpoint: ai-factory-azure
       type: github
-    - repository: project-code  # Code Repo
-      name: ai-factory-azure/project-template-tabular-batch-code
-      endpoint: ai-factory-azure
-      type: github
 
 stages:
 - stage: DeployTrainingPipeline
@@ -25,17 +21,22 @@ stages:
     - job: DeployTrainingPipeline
       steps:
       - checkout: self
-        path: s/controller/
+        path: s/
       - checkout: templates-mlops
         path: s/templates/
-      - checkout: project-code
-        path: s/code/
+      - template: templates/install-az-cli.yml@templates-mlops
       - template: templates/install-aml-cli.yml@templates-mlops
       - template: templates/connect-to-workspace.yml@templates-mlops
       - template: templates/create-environment.yml@templates-mlops
         parameters:
           environment_name: $(training_environment_name)
           environment_conda_yaml: $(training_environment_conda_yaml)
+      - template: templates/register-dataset.yml@templates-mlops
+        parameters:
+          data_type: training
+      - template: templates/get-compute.yml@templates-mlops
+        parameters:
+          compute_type: training
       - template: templates/deploy-training-pipeline.yml@templates-mlops
-      # - template: templates/run-pipeline.yml@templates-mlops
       - template: templates/add-pipeline-to-endpoint.yml@templates-mlops
+      - template: templates/run-pipeline.yml@templates-mlops

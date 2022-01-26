@@ -10,8 +10,8 @@ variables:
   training_dataset_description: uci_credit
   training_dataset_local_path: code/data/
   training_dataset_path_on_datastore: data/
-  training_dataset_type: cloud
-  training_dataset_storage_url: 'https://azureaidemostorage.blob.core.windows.net/data/train/'
+  training_dataset_type: local
+  training_dataset_storage_url: 'https://azureaidemostorage.blob.core.windows.net/data/'
 
 # Training pipeline settings
 

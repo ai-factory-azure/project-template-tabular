@@ -11,7 +11,7 @@ resources:
   repositories:
     - repository: templates-mlops  # Template Repo
       name: ai-factory-azure/templates-mlops
-      endpoint: Github-Service-Endpoint
+      endpoint: AI-Factory
       type: github
 
 stages:
